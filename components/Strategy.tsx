@@ -48,66 +48,97 @@ const strategies = [
 ]
 
 export default function Strategy() {
+  const handleDownload = async () => {
+    try {
+      const response = await fetch('/@TKLABEL_KIMTAEEUN.MD');
+      if (!response.ok) throw new Error('파일을 찾을 수 없습니다.');
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', '@TKLABEL_KIMTAEEUN.MD');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('다운로드 중 오류가 발생했습니다:', error);
+      alert('파일 다운로드에 실패했습니다. 잠시 후 다시 시도해주세요.');
+    }
+  };
+
   return (
-    <section className="py-20 bg-black">
+    <section className="py-24 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4" data-aos="fade-up">
-            전략적 제안
-          </h2>
-          <p className="text-gray-400 text-lg" data-aos="fade-up" data-aos-delay="200">
-            시장 선도를 위한 단계별 전략
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <h2 className="text-4xl font-bold text-white mb-8">전략적 제안</h2>
+          <p className="text-xl text-gray-400 mb-12">
+            메가존클라우드와 텐센트클라우드의 AI 시장 진출 전략
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {strategies.map((strategy, index) => (
-            <motion.div
-              key={strategy.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 overflow-hidden group hover:from-gray-700 hover:to-gray-800 transition-colors duration-300"
-            >
-              {/* 배경 효과 */}
-              <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-              
-              <div className="relative z-10">
-                <strategy.icon className="w-12 h-12 text-blue-500 mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-4">{strategy.title}</h3>
-                
-                <div className="space-y-4">
-                  {strategy.steps.map((step, stepIndex) => (
-                    <motion.div
-                      key={step}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: (index * 0.2) + (stepIndex * 0.1) }}
-                      className="flex items-center space-x-3"
-                    >
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center text-sm">
-                        {stepIndex + 1}
-                      </span>
-                      <span className="text-gray-300">{step}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 p-8 rounded-2xl border border-gray-800"
+          >
+            <h3 className="text-2xl font-bold text-white mb-4">시장 분석</h3>
+            <ul className="space-y-3 text-gray-400">
+              <li>• 클라우드 시장 현황 파악</li>
+              <li>• AI 시장 성장성 분석</li>
+              <li>• 경쟁사 동향 조사</li>
+            </ul>
+          </motion.div>
 
-              {/* 호버 효과 */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/10 group-hover:to-pink-500/10 transition-opacity duration-300" />
-            </motion.div>
-          ))}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-8 rounded-2xl border border-gray-800"
+          >
+            <h3 className="text-2xl font-bold text-white mb-4">진입 전략</h3>
+            <ul className="space-y-3 text-gray-400">
+              <li>• 단계별 시장 진입</li>
+              <li>• 차별화된 서비스 제공</li>
+              <li>• 현지화 전략 수립</li>
+            </ul>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6 }}
+            className="bg-gradient-to-br from-pink-500/10 to-red-500/10 p-8 rounded-2xl border border-gray-800"
+          >
+            <h3 className="text-2xl font-bold text-white mb-4">성장 전략</h3>
+            <ul className="space-y-3 text-gray-400">
+              <li>• 파트너십 구축</li>
+              <li>• 기술 경쟁력 강화</li>
+              <li>• 시장 점유율 확대</li>
+            </ul>
+          </motion.div>
         </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-16 text-center"
+          viewport={{ once: true }}
+          transition={{ delay: 0.8 }}
+          className="text-center"
         >
-          <a
-            href="#"
+          <button
+            onClick={handleDownload}
             className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-white font-semibold hover:from-blue-700 hover:to-purple-700 transition-colors"
           >
             <span>전략 상세 문서 다운로드</span>
@@ -125,7 +156,7 @@ export default function Strategy() {
                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
               />
             </svg>
-          </a>
+          </button>
         </motion.div>
       </div>
     </section>
