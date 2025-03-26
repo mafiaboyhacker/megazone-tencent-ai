@@ -287,6 +287,22 @@ const handleDownload = () => {
   }
 };
 
+// 추가: 미팅 내용 다운로드 함수 추가
+const handleMeetingDownload = () => {
+  try {
+    const mdUrl = '/MEGAZON_TKLABEL_25_3_6.MD';
+    const link = document.createElement('a');
+    link.href = mdUrl;
+    link.setAttribute('download', 'MEGAZON_TKLABEL_25_3_6.MD');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } catch (error) {
+    console.error('다운로드 오류:', error);
+    alert('미팅 내용 다운로드 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+  }
+};
+
 export default function Strategy() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [hoveredIndustry, setHoveredIndustry] = useState<string | null>(null);
@@ -554,7 +570,7 @@ export default function Strategy() {
 
         {/* 다운로드 버튼 */}
         <motion.div
-          className="text-center"
+          className="text-center flex flex-col md:flex-row gap-4 justify-center items-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -567,6 +583,15 @@ export default function Strategy() {
           >
             <ArrowDownTrayIcon className="w-5 h-5 mr-2" />
             <span>전략 보고서 다운로드</span>
+          </motion.button>
+          <motion.button
+            onClick={handleMeetingDownload}
+            className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-green-500 to-teal-500 text-white font-semibold shadow-lg"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <ArrowDownTrayIcon className="w-5 h-5 mr-2" />
+            <span>미팅 내용 다운로드</span>
           </motion.button>
         </motion.div>
       </div>
