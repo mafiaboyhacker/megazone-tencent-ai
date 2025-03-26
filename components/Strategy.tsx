@@ -271,23 +271,20 @@ const BackgroundParticles = () => {
 };
 
 // 파일 다운로드 함수
-const handleDownload = async () => {
+const handleDownload = () => {
   try {
-    const response = await fetch('/api/download-report');
-    if (!response.ok) throw new Error('다운로드 실패');
-    
-    const blob = await response.blob();
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'megazone-tencent-ai-strategy.pdf';
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
+    // PDF 파일 직접 다운로드 링크
+    const pdfUrl = '/reports/megazone-tencent-ai-strategy.pdf';
+    const link = document.createElement('a');
+    link.href = pdfUrl;
+    link.setAttribute('download', 'megazone-tencent-ai-strategy.pdf');
+    link.setAttribute('target', '_blank');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   } catch (error) {
     console.error('다운로드 오류:', error);
-    alert('보고서 다운로드 중 오류가 발생했습니다.');
+    alert('보고서 다운로드 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
   }
 };
 
