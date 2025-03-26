@@ -1,5 +1,3 @@
-I'll create a comprehensive webpage that consolidates information from all the provided files, emphasizing key points with bold formatting and including graphs and tables where appropriate. I'll maintain all important content without omission.
-
 # 메가존클라우드 & 텐센트 클라우드 코리아: AI 시장 협업 전략 보고서
 
 ## 목차
