@@ -19,6 +19,7 @@ import {
   CurrencyDollarIcon
 } from '@heroicons/react/24/outline'
 import { useState, useEffect } from 'react'
+import { track } from '@vercel/analytics/react'
 
 // 산업별 디지털 전환 데이터
 const industryTransformation = [
@@ -273,7 +274,17 @@ const BackgroundParticles = () => {
 // 파일 다운로드 함수
 const handleDownload = () => {
   try {
-    // MD 파일 직접 다운로드 링크
+    // 다운로드 이벤트 트래킹
+    track('report_download', {
+      type: 'strategy',
+      fileName: '@TKLABEL_KIMTAEEUN.MD',
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent,
+      language: navigator.language,
+      screenResolution: `${window.screen.width}x${window.screen.height}`,
+      documentTitle: document.title
+    });
+
     const mdUrl = '/@TKLABEL_KIMTAEEUN.MD';
     const link = document.createElement('a');
     link.href = mdUrl;
@@ -281,15 +292,32 @@ const handleDownload = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('다운로드 오류:', error);
+    // 에러 이벤트 트래킹
+    track('download_error', {
+      type: 'strategy',
+      error: error instanceof Error ? error.message : String(error),
+      timestamp: new Date().toISOString()
+    });
     alert('보고서 다운로드 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
   }
 };
 
-// 추가: 미팅 내용 다운로드 함수 추가
+// 미팅 내용 다운로드 함수
 const handleMeetingDownload = () => {
   try {
+    // 다운로드 이벤트 트래킹
+    track('report_download', {
+      type: 'meeting',
+      fileName: 'MEGAZON_TKLABEL_25_3_6.MD',
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent,
+      language: navigator.language,
+      screenResolution: `${window.screen.width}x${window.screen.height}`,
+      documentTitle: document.title
+    });
+
     const mdUrl = '/MEGAZON_TKLABEL_25_3_6.MD';
     const link = document.createElement('a');
     link.href = mdUrl;
@@ -297,8 +325,14 @@ const handleMeetingDownload = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('다운로드 오류:', error);
+    // 에러 이벤트 트래킹
+    track('download_error', {
+      type: 'meeting',
+      error: error instanceof Error ? error.message : String(error),
+      timestamp: new Date().toISOString()
+    });
     alert('미팅 내용 다운로드 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
   }
 };

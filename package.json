@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",
+    "@vercel/speed-insights": "^1.2.0",
     "aos": "^2.3.4",
     "chart.js": "^4.4.2",
     "framer-motion": "^11.0.8",
