@@ -273,12 +273,11 @@ const BackgroundParticles = () => {
 // 파일 다운로드 함수
 const handleDownload = () => {
   try {
-    // PDF 파일 직접 다운로드 링크
-    const pdfUrl = '/reports/megazone-tencent-ai-strategy.pdf';
+    // MD 파일 직접 다운로드 링크
+    const mdUrl = '/@TKLABEL_KIMTAEEUN.MD';
     const link = document.createElement('a');
-    link.href = pdfUrl;
-    link.setAttribute('download', 'megazone-tencent-ai-strategy.pdf');
-    link.setAttribute('target', '_blank');
+    link.href = mdUrl;
+    link.setAttribute('download', '@TKLABEL_KIMTAEEUN.MD');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
