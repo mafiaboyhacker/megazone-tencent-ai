@@ -8,21 +8,50 @@ import {
   ChartBarIcon,
   LightBulbIcon,
   SparklesIcon,
+  PresentationChartLineIcon,
 } from '@heroicons/react/24/outline'
+
+const marketData = [
+  {
+    title: '클라우드 시장',
+    stats: [
+      { year: 2025, value: '68.3억 달러' },
+      { year: 2030, value: '198.9억 달러' },
+      { label: '연평균 성장률', value: '23.82%' }
+    ]
+  },
+  {
+    title: 'AI 시장',
+    stats: [
+      { year: 2024, value: '31억 달러' },
+      { year: 2033, value: '300억 달러' },
+      { label: '연평균 성장률', value: '26.6%' }
+    ]
+  },
+  {
+    title: 'GPU 클라우드',
+    stats: [
+      { year: 2030, value: '4.93억 달러' },
+      { label: '연평균 성장률', value: '24.4%' }
+    ]
+  }
+]
 
 const strategies = [
   {
     title: '단계적 시장 확장',
     icon: RocketLaunchIcon,
+    description: '게임 산업(230억 달러)에서 AI 시장(2025년 7.72억 달러)으로 확장',
     steps: [
       '게임사 고객 AI 서비스 확장',
       '미디어/엔터테인먼트 산업 진출',
-      '전체 산업으로 확대',
+      '전체 산업으로 확대 (2030년 23.6억 달러 시장)',
     ],
   },
   {
     title: '비즈니스 모델',
     icon: CurrencyDollarIcon,
+    description: 'AI 도입을 통한 GDP 12.6% 증가 전망',
     steps: [
       '엔터프라이즈 통합 AI 플랫폼',
       'AI 비즈니스 스타터 패키지',
@@ -30,17 +59,9 @@ const strategies = [
     ],
   },
   {
-    title: '파트너십 전략',
-    icon: UserGroupIcon,
-    steps: [
-      '학계 및 연구기관 협력',
-      '산업별 대표기업 협력',
-      'GPU 제조사와 파트너십',
-    ],
-  },
-  {
-    title: '성장 목표',
+    title: '시장 점유율',
     icon: ChartBarIcon,
+    description: 'AWS(62.1%), Azure(12%) 대비 차별화 전략',
     steps: [
       '2025년까지 시장점유율 10% 달성',
       '연간 고객 증가율 50% 이상',
@@ -90,92 +111,68 @@ export default function Strategy() {
           <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500 mb-8">
             전략적 제안
           </h2>
-          <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto">
             메가존클라우드와 텐센트클라우드의 AI 시장 진출 전략
+            <br />
+            <span className="text-sm">2025년까지 1만개 GPU 확보 목표</span>
           </p>
         </motion.div>
 
+        {/* 시장 데이터 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 p-8 rounded-2xl border border-gray-800 backdrop-blur-sm relative group"
-          >
-            <div className="absolute inset-0 bg-blue-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-            <LightBulbIcon className="w-12 h-12 text-blue-500 mb-6" />
-            <h3 className="text-2xl font-bold text-white mb-4">시장 분석</h3>
-            <ul className="space-y-3 text-gray-400">
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2" />
-                클라우드 시장 현황 파악
-              </li>
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-purple-500 rounded-full mr-2" />
-                AI 시장 성장성 분석
-              </li>
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-pink-500 rounded-full mr-2" />
-                경쟁사 동향 조사
-              </li>
-            </ul>
-          </motion.div>
+          {marketData.map((market, index) => (
+            <motion.div
+              key={market.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 * index }}
+              whileHover={{ scale: 1.02 }}
+              className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 p-8 rounded-2xl border border-gray-800 backdrop-blur-sm relative group"
+            >
+              <div className="absolute inset-0 bg-blue-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <PresentationChartLineIcon className="w-12 h-12 text-blue-500 mb-6" />
+              <h3 className="text-2xl font-bold text-white mb-4">{market.title}</h3>
+              <ul className="space-y-3">
+                {market.stats.map((stat, i) => (
+                  <li key={i} className="flex items-center justify-between">
+                    <span className="text-gray-400">
+                      {stat.year ? `${stat.year}년` : stat.label}:
+                    </span>
+                    <span className="text-blue-400 font-semibold">{stat.value}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-8 rounded-2xl border border-gray-800 backdrop-blur-sm relative group"
-          >
-            <div className="absolute inset-0 bg-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-            <RocketLaunchIcon className="w-12 h-12 text-purple-500 mb-6" />
-            <h3 className="text-2xl font-bold text-white mb-4">진입 전략</h3>
-            <ul className="space-y-3 text-gray-400">
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-purple-500 rounded-full mr-2" />
-                단계별 시장 진입
-              </li>
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-pink-500 rounded-full mr-2" />
-                차별화된 서비스 제공
-              </li>
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-red-500 rounded-full mr-2" />
-                현지화 전략 수립
-              </li>
-            </ul>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-br from-pink-500/10 to-red-500/10 p-8 rounded-2xl border border-gray-800 backdrop-blur-sm relative group"
-          >
-            <div className="absolute inset-0 bg-pink-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-            <ChartBarIcon className="w-12 h-12 text-pink-500 mb-6" />
-            <h3 className="text-2xl font-bold text-white mb-4">성장 전략</h3>
-            <ul className="space-y-3 text-gray-400">
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-pink-500 rounded-full mr-2" />
-                파트너십 구축
-              </li>
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-red-500 rounded-full mr-2" />
-                기술 경쟁력 강화
-              </li>
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-orange-500 rounded-full mr-2" />
-                시장 점유율 확대
-              </li>
-            </ul>
-          </motion.div>
+        {/* 전략 카드 */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          {strategies.map((strategy, index) => (
+            <motion.div
+              key={strategy.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 * index }}
+              whileHover={{ scale: 1.02 }}
+              className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 p-8 rounded-2xl border border-gray-800 backdrop-blur-sm relative group"
+            >
+              <div className="absolute inset-0 bg-blue-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <strategy.icon className="w-12 h-12 text-blue-500 mb-6" />
+              <h3 className="text-2xl font-bold text-white mb-4">{strategy.title}</h3>
+              <p className="text-gray-400 mb-4 text-sm">{strategy.description}</p>
+              <ul className="space-y-3">
+                {strategy.steps.map((step, i) => (
+                  <li key={i} className="flex items-center">
+                    <span className="w-2 h-2 bg-blue-500 rounded-full mr-2" />
+                    <span className="text-gray-400">{step}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
 
         <motion.div
