@@ -6,6 +6,8 @@ import {
   CurrencyDollarIcon,
   UserGroupIcon,
   ChartBarIcon,
+  LightBulbIcon,
+  SparklesIcon,
 } from '@heroicons/react/24/outline'
 
 const strategies = [
@@ -69,33 +71,55 @@ export default function Strategy() {
   };
 
   return (
-    <section className="py-24 bg-black">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 bg-gradient-to-b from-black via-blue-900/20 to-black relative overflow-hidden">
+      {/* 배경 그래픽 요소 */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br from-blue-500/10 to-transparent rotate-12 transform scale-150" />
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-to-tl from-purple-500/10 to-transparent -rotate-12 transform scale-150" />
+      </div>
+
+      {/* 메인 컨텐츠 */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center"
+          className="text-center relative"
         >
-          <h2 className="text-4xl font-bold text-white mb-8">전략적 제안</h2>
-          <p className="text-xl text-gray-400 mb-12">
+          <SparklesIcon className="w-12 h-12 mx-auto mb-6 text-blue-500" />
+          <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500 mb-8">
+            전략적 제안
+          </h2>
+          <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
             메가존클라우드와 텐센트클라우드의 AI 시장 진출 전략
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 p-8 rounded-2xl border border-gray-800"
+            whileHover={{ scale: 1.02 }}
+            className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 p-8 rounded-2xl border border-gray-800 backdrop-blur-sm relative group"
           >
+            <div className="absolute inset-0 bg-blue-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+            <LightBulbIcon className="w-12 h-12 text-blue-500 mb-6" />
             <h3 className="text-2xl font-bold text-white mb-4">시장 분석</h3>
             <ul className="space-y-3 text-gray-400">
-              <li>• 클라우드 시장 현황 파악</li>
-              <li>• AI 시장 성장성 분석</li>
-              <li>• 경쟁사 동향 조사</li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2" />
+                클라우드 시장 현황 파악
+              </li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-purple-500 rounded-full mr-2" />
+                AI 시장 성장성 분석
+              </li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-pink-500 rounded-full mr-2" />
+                경쟁사 동향 조사
+              </li>
             </ul>
           </motion.div>
 
@@ -104,13 +128,25 @@ export default function Strategy() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-8 rounded-2xl border border-gray-800"
+            whileHover={{ scale: 1.02 }}
+            className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-8 rounded-2xl border border-gray-800 backdrop-blur-sm relative group"
           >
+            <div className="absolute inset-0 bg-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+            <RocketLaunchIcon className="w-12 h-12 text-purple-500 mb-6" />
             <h3 className="text-2xl font-bold text-white mb-4">진입 전략</h3>
             <ul className="space-y-3 text-gray-400">
-              <li>• 단계별 시장 진입</li>
-              <li>• 차별화된 서비스 제공</li>
-              <li>• 현지화 전략 수립</li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-purple-500 rounded-full mr-2" />
+                단계별 시장 진입
+              </li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-pink-500 rounded-full mr-2" />
+                차별화된 서비스 제공
+              </li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-red-500 rounded-full mr-2" />
+                현지화 전략 수립
+              </li>
             </ul>
           </motion.div>
 
@@ -119,13 +155,25 @@ export default function Strategy() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.6 }}
-            className="bg-gradient-to-br from-pink-500/10 to-red-500/10 p-8 rounded-2xl border border-gray-800"
+            whileHover={{ scale: 1.02 }}
+            className="bg-gradient-to-br from-pink-500/10 to-red-500/10 p-8 rounded-2xl border border-gray-800 backdrop-blur-sm relative group"
           >
+            <div className="absolute inset-0 bg-pink-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+            <ChartBarIcon className="w-12 h-12 text-pink-500 mb-6" />
             <h3 className="text-2xl font-bold text-white mb-4">성장 전략</h3>
             <ul className="space-y-3 text-gray-400">
-              <li>• 파트너십 구축</li>
-              <li>• 기술 경쟁력 강화</li>
-              <li>• 시장 점유율 확대</li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-pink-500 rounded-full mr-2" />
+                파트너십 구축
+              </li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-red-500 rounded-full mr-2" />
+                기술 경쟁력 강화
+              </li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-orange-500 rounded-full mr-2" />
+                시장 점유율 확대
+              </li>
             </ul>
           </motion.div>
         </div>
@@ -135,15 +183,15 @@ export default function Strategy() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.8 }}
-          className="text-center"
+          className="text-center relative"
         >
           <button
             onClick={handleDownload}
-            className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-white font-semibold hover:from-blue-700 hover:to-purple-700 transition-colors"
+            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-white font-semibold hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
           >
             <span>전략 상세 문서 다운로드</span>
             <svg
-              className="ml-2 w-5 h-5"
+              className="ml-2 w-5 h-5 animate-bounce"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
